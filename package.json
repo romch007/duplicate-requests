@@ -1,8 +1,12 @@
 {
   "name": "duplicate-requests",
   "version": "1.0.1",
-  "description": "Middleware to avoid duplicates requests made by client",
-  "keywords": ["express", "middleware", "requests"],
+  "description": "Express middleware to avoid duplicates requests made by client",
+  "keywords": [
+    "express",
+    "middleware",
+    "requests"
+  ],
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
@@ -43,9 +47,7 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
-    "keyv": "^4.0.1"
-  },
-  "peerDependencies": {
-    "express": "4.x"
+    "keyv": "^4.0.1",
+    "@types/express": "^4.17.7"
   }
 }
