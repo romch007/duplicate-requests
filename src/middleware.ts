@@ -3,7 +3,7 @@ import { Store } from "./store";
 
 let store: Store;
 
-export default function createMiddleware(
+export function createMiddleware(
   expiration: number,
   propertyName: string
 ): (req: Request, res: Response, next: NextFunction) => Promise<void> {
