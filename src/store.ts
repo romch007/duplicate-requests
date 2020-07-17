@@ -10,10 +10,17 @@ export type Request = {
   emittedAt: Date;
 };
 
+/**
+ * Class wrapper for the keyv instance
+ */
 export class Store {
   private keyvInstance: Keyv;
   public expiration: number;
 
+  /**
+   * Create a Store instance
+   * @param options - store options
+   */
   constructor(options?: Options) {
     this.expiration = options?.expiration ?? 1.08e7;
     this.keyvInstance = new Keyv({
@@ -22,6 +29,12 @@ export class Store {
     });
   }
 
+  /**
+   * Add a request to the store
+   * @param id - The request id
+   * @param success - If the request is sucessfull
+   * @return An empty Promise
+   */
   async addRequest(id: string, success: boolean): Promise<void> {
     const request = {
       id,
@@ -39,6 +52,11 @@ export class Store {
     );
   }
 
+  /**
+   * Check if a request already exists in store
+   * @param id - The request id
+   * @return A Promise containing the request or null if the request does not exist
+   */
   async isRequestExists(id: string): Promise<Request | null> {
     const object = await this.keyvInstance.get(id);
     return object as Request;
