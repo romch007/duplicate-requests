@@ -18,6 +18,8 @@ const app = express();
 
 app.use(duplicate(10000, "id"));
 
+app.get("/", (req, res) => res.end("Hey!"));
+
 app.listen(8080, () => console.log("Listening!"));
 ```
 
