@@ -1,6 +1,21 @@
 import { Request, Response, NextFunction } from "express";
 import { Store } from "./store";
 
+export type IndicatorsValue = {
+  [key: string]: number;
+};
+
+const timestampRegexp = /^(\d)((?:ms)|s|m|h|d|w)$/;
+
+const indicatorsValue: IndicatorsValue = {
+  ms: 1,
+  s: 1000,
+  m: 6000,
+  h: 3.6e6,
+  d: 8.64e7,
+  w: 6.048e8
+};
+
 export type MiddlewareFunction = (
   req: Request,
   res: Response,
@@ -18,21 +33,6 @@ export type MiddlewareOptions = {
   expiration?: string;
   errorHandling?: ErrorHandlingOptions;
   property: string | PropertyPicker;
-};
-
-export type IndicatorsValue = {
-  [key: string]: number;
-};
-
-const timestampRegexp = /^(\d)((?:ms)|s|m|h|d|w)$/;
-
-const indicatorsValue: IndicatorsValue = {
-  ms: 1,
-  s: 1000,
-  m: 6000,
-  h: 3.6e6,
-  d: 8.64e7,
-  w: 6.048e8
 };
 
 /**
@@ -55,8 +55,7 @@ let store: Store;
 
 /**
  * Generate the middleware function
- * @param expiration - Request expiration in the store
- * @param propertyName - The property in req.query containing the request id
+ * @param options - Middleware options
  * @return The middleware function used by express
  */
 export function createMiddleware(
@@ -71,13 +70,11 @@ export function createMiddleware(
     res: Response,
     next: NextFunction
   ) => {
-    let id: string;
     // If options.property is a function, gets is return value
-    if (typeof options.property === "function") {
-      id = options.property(req);
-    } else {
-      id = String(req.query[options.property]);
-    }
+    const id: string =
+      typeof options.property === "function"
+        ? options.property(req)
+        : String(req.query[options.property]);
 
     const alreadyExists = await store.isRequestExists(id);
     if (alreadyExists) {
@@ -90,6 +87,7 @@ export function createMiddleware(
 
       res.status(statusCode).json(responseData);
     } else {
+      // Don't wait for addRequest to finish, no await
       store.addRequest(id, false);
       next();
     }
