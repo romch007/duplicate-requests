@@ -1,6 +1,6 @@
 {
   "name": "duplicate-requests",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Middleware to avoid duplicates requests made by client",
   "main": "build/index.js",
   "types": "build/index.d.ts",
