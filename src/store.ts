@@ -1,6 +1,6 @@
 import Keyv from "keyv";
 
-export type Options = {
+export type StoreOptions = {
   expiration?: number;
 };
 
@@ -21,7 +21,7 @@ export class Store {
    * Create a Store instance
    * @param options - store options
    */
-  constructor(options?: Options) {
+  constructor(options?: StoreOptions) {
     this.expiration = options?.expiration ?? 1.08e7;
     this.keyvInstance = new Keyv({
       serialize: JSON.stringify,
