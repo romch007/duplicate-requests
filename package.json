@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/topicapp/duplicate-requests.git"
+    "url": "git+https://gitlab.com/romch007/duplicate-requests.git"
   },
   "author": "Romain Chardiny <romain.chardiny@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/topicapp/duplicate-requests/issues"
+    "url": "https://gitlab.com/romch007/duplicate-requests/issues"
   },
-  "homepage": "https://gitlab.com/topicapp/duplicate-requests#readme",
+  "homepage": "https://gitlab.com/romch007/duplicate-requests#readme",
   "devDependencies": {
     "@types/jest": "^26.0.4",
     "@types/keyv": "^3.1.1",
@@ -38,5 +38,8 @@
   },
   "dependencies": {
     "keyv": "^4.0.1"
+  },
+  "peerDependencies": {
+    "express": "4.x"
   }
 }
