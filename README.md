@@ -4,8 +4,6 @@ This middleware aims to avoid duplicated requests made the client, due to lack o
 
 Assuming the client send an unique id with every request (not duplicated requests), the middleware will send an error or resend the content of the previous request if a request already arrived have the same id.
 
-
-
 ## Usage :
 
 ```javascript
@@ -23,18 +21,14 @@ app.get("/", (req, res) => res.end("Hey!"));
 app.listen(8080, () => console.log("Listening!"));
 ```
 
-
-
 ## Todo
 
-- [ ] Custom error
+- [x] Custom error
 
 - [ ] Cache request and don't send error
 
-- [ ] Timestamp parser (`1d`, `3h`)
+- [x] Timestamp parser (`1d`, `3h`)
 
-- [ ] Pick id from body
+- [x] Pick id from body
 
-- [ ] Integration test for middleware
-
-
+- [x] Integration test for middleware
