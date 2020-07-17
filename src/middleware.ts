@@ -57,6 +57,7 @@ let store: Store;
  * Generate the middleware function
  * @param expiration - Request expiration in the store
  * @param propertyName - The property in req.query containing the request id
+ * @return The middleware function used by express
  */
 export function createMiddleware(
   options: MiddlewareOptions
