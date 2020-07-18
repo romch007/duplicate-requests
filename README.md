@@ -35,11 +35,22 @@ app.listen(8080, () => console.log("Listening!"));
                    * should be a string or a function 
                    * with a req paramater which returns a string
                    */
+  prefix: "article.add", // Prefix to group requests in storage
   errorHandling: {
-    statusCode: 429 // The status code to send if request is duplicated
+    statusCode: 429, // The status code to send if request is duplicated
     json: {} // Javascript plain object to send if request is duplicated
-  }
+  },
+  connectionUri: "" // Leave empty to store object in memory, or use redis:// or mongodb://
 }
+```
+
+### External storage
+
+If you want to use an external storage (currently supported are Redis and MongoDB), you need to install one of the following package :
+
+```bash
+npm install --save @keyv/mongo
+npm install --save @keyv/redis
 ```
 
 ## Todo

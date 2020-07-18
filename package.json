@@ -12,7 +12,6 @@
   "scripts": {
     "test": "jest tests/",
     "test:coverage": "jest tests/ --coverage && cd coverage/lcov-report && live-server",
-    "test:unitci": "jest tests/ --coverage",
     "test:integration": "jest integration/",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",

@@ -58,11 +58,14 @@ export type PropertyPicker =
  * @param expiration - TTL of requests
  * @param errorHandling - Error handling configuration
  * @param property - Way to get the id property
+ * @param connectionUri - URI to connect to a redis or mongodb backend
  */
 export type MiddlewareOptions = {
   expiration?: string;
   errorHandling?: ErrorHandlingOptions;
   property: string | PropertyPicker;
+  prefix: string;
+  connectionUri?: string;
 };
 
 /**
@@ -92,7 +95,8 @@ export function createMiddleware(
   options: MiddlewareOptions
 ): MiddlewareFunction {
   store = new Store({
-    expiration: parseTimestamp(options?.expiration ?? "2h")
+    expiration: parseTimestamp(options?.expiration ?? "2h"),
+    prefix: options?.prefix
   });
 
   const middlewareFunction = async (

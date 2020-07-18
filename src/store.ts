@@ -4,10 +4,12 @@ import Keyv from "keyv";
  * Store options
  * @param expiration - TTL of the request, in milliseconds
  * @param connectionUri - Optional connection URI
+ * @param prefix - A prefix used by keyv to group key-value in storage
  */
 export type StoreOptions = {
   expiration?: number;
   connectionUri?: string;
+  prefix?: string;
 };
 
 /**
@@ -31,14 +33,14 @@ export class Store {
 
   /**
    * Create a Store instance
-   * @param options - store options
+   * @param options - Store options
    */
   constructor(options?: StoreOptions) {
     this.expiration = options?.expiration ?? 1.08e7;
     this.keyvInstance = new Keyv(options?.connectionUri ?? "", {
       serialize: JSON.stringify,
       deserialize: JSON.parse,
-      namespace: "duplicate"
+      namespace: options?.prefix ?? "duplicate"
     });
   }
 
