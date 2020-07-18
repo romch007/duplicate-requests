@@ -1,17 +1,5 @@
-import {
-  parseTimestamp,
-  MiddlewareOptions,
-  createMiddleware
-} from "../src/middleware";
-import supertest, { SuperAgentTest } from "supertest";
-import express from "express";
-
-const createAgent = (options: MiddlewareOptions): SuperAgentTest => {
-  const app = express();
-  app.use(createMiddleware(options));
-  app.get("/", (_, res) => res.json({ success: true }));
-  return supertest.agent(app);
-};
+import { parseTimestamp } from "../src/middleware";
+import { createAgent } from "./helpers";
 
 describe("Middleware", () => {
   it("should work with propertyName as a string", async () => {
@@ -30,6 +18,34 @@ describe("Middleware", () => {
     const response = await agent.get("/?example=test");
 
     expect(response.status).toBe(429);
+  });
+
+  it("should set statusCode", async () => {
+    const statusCode = 404;
+
+    const agent = createAgent({
+      property: "id",
+      errorHandling: { statusCode }
+    });
+
+    await agent.get("/?id=test");
+    const response = await agent.get("/?id=test");
+
+    expect(response.status).toBe(statusCode);
+  });
+
+  it("should set json body", async () => {
+    const json = { error: true };
+
+    const agent = createAgent({
+      property: "id",
+      errorHandling: { json }
+    });
+
+    await agent.get("/?id=test");
+    const response = await agent.get("/?id=test");
+
+    expect(response.body).toStrictEqual(json);
   });
 });
 

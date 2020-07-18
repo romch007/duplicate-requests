@@ -1,9 +1,21 @@
 import Keyv from "keyv";
 
+/**
+ * Store options
+ * @param expiration - TTL of the request, in milliseconds
+ * @param connectionUri - Optional connection URI
+ */
 export type StoreOptions = {
   expiration?: number;
+  connectionUri?: string;
 };
 
+/**
+ * The request object
+ * @param id - The unique id sent by client
+ * @param sucess - If the request is sucessfull
+ * @param emittedAt - When the request is emitted
+ */
 export type Request = {
   id: string;
   success: boolean;
@@ -23,9 +35,10 @@ export class Store {
    */
   constructor(options?: StoreOptions) {
     this.expiration = options?.expiration ?? 1.08e7;
-    this.keyvInstance = new Keyv({
+    this.keyvInstance = new Keyv(options?.connectionUri ?? "", {
       serialize: JSON.stringify,
-      deserialize: JSON.parse
+      deserialize: JSON.parse,
+      namespace: "duplicate"
     });
   }
 
@@ -35,7 +48,7 @@ export class Store {
    * @param success - If the request is sucessfull
    * @return An empty Promise
    */
-  async addRequest(id: string, success: boolean): Promise<void> {
+  public async addRequest(id: string, success: boolean): Promise<void> {
     const request = {
       id,
       success,
@@ -57,7 +70,7 @@ export class Store {
    * @param id - The request id
    * @return A Promise containing the request or null if the request does not exist
    */
-  async isRequestExists(id: string): Promise<Request | null> {
+  public async isRequestExists(id: string): Promise<Request | null> {
     const object = await this.keyvInstance.get(id);
     return object as Request;
   }

@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { Store } from "./store";
 
+/**
+ * Type for the timestamp parsing
+ */
 export type IndicatorsValue = {
   [key: string]: number;
 };
@@ -16,19 +19,46 @@ const indicatorsValue: IndicatorsValue = {
   w: 6.048e8
 };
 
+/**
+ * Type for middleware function used by express
+ * @param req - The request object
+ * @param req - The response object
+ * @param next - The next function
+ * @return An empty Promise, to support async/await
+ */
 export type MiddlewareFunction = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => Promise<void>;
 
+/**
+ * Error handling options
+ * @param json - Javascript plain object to send to client if request is duplicated
+ * @param statusCodes - Status code to send to the client if request is duplicated
+ */
 export type ErrorHandlingOptions = {
   json?: unknown;
   statusCode?: number;
 };
 
-export type PropertyPicker = (req: Request) => string;
+/**
+ * Property picker
+ */
+export type PropertyPicker =
+  /**
+   * @param req - The request object
+   * @return The id
+   */
 
+  (req: Request) => string;
+
+/**
+ * Middleware options passing at creation
+ * @param expiration - TTL of requests
+ * @param errorHandling - Error handling configuration
+ * @param property - Way to get the id property
+ */
 export type MiddlewareOptions = {
   expiration?: string;
   errorHandling?: ErrorHandlingOptions;

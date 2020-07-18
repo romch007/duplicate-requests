@@ -14,18 +14,39 @@ const duplicate = require("duplicate-requests").default;
 const express = require("express");
 const app = express();
 
-app.use(duplicate(10000, "id"));
+app.use(duplicate({
+    expiration: "2h",
+    property: "id"
+}));
 
 app.get("/", (req, res) => res.end("Hey!"));
 
 app.listen(8080, () => console.log("Listening!"));
 ```
 
+### Options
+
+```javascript
+{
+  expiration: "2h", /* Expiration time of the request in memory
+                     * should be an int followed by ms, s, m, h, d, w,
+                     */
+  property: "id", /* Property which contains the id
+                   * should be a string or a function 
+                   * with a req paramater which returns a string
+                   */
+  errorHandling: {
+    statusCode: 429 // The status code to send if request is duplicated
+    json: {} // Javascript plain object to send if request is duplicated
+  }
+}
+```
+
 ## Todo
 
 - [x] Custom error
 
-- [ ] Cache request and don't send error
+- [ ] Parameter to cache request and don't send error
 
 - [x] Timestamp parser (`1d`, `3h`)
 

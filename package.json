@@ -1,6 +1,6 @@
 {
   "name": "duplicate-requests",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Express middleware to avoid duplicates requests made by client",
   "keywords": [
     "express",
@@ -10,8 +10,9 @@
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "test": "jest",
-    "test:coverage": "jest --coverage && cd coverage/lcov-report && live-server",
+    "test": "jest tests/",
+    "test:coverage": "jest tests/ --coverage && cd coverage/lcov-report && live-server",
+    "test:integration": "jest integration/",
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "eslint src/",
@@ -49,5 +50,9 @@
   "dependencies": {
     "keyv": "^4.0.1",
     "@types/express": "^4.17.7"
+  },
+  "optionalDependencies": {
+    "@keyv/mongo": "^1.1.0",
+    "@keyv/redis": "^2.1.2"
   }
 }
