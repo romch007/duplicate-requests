@@ -55,5 +55,6 @@
   "optionalDependencies": {
     "@keyv/mongo": "^1.1.0",
     "@keyv/redis": "^2.1.2"
-  }
+  },
+  "engines": { "node": ">=6.0.0" }
 }
