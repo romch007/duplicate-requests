@@ -3,7 +3,7 @@ import { createAgent } from "./helpers";
 
 describe("Middleware", () => {
   it("should work with propertyName as a string", async () => {
-    const agent = createAgent({ property: "id" });
+    const agent = createAgent({ property: "id", prefix: "test" });
 
     await agent.get("/?id=test");
     const response = await agent.get("/?id=test");
@@ -12,7 +12,10 @@ describe("Middleware", () => {
   });
 
   it("should work with propertyName as a function", async () => {
-    const agent = createAgent({ property: req => String(req.query.example) });
+    const agent = createAgent({
+      property: req => String(req.query.example),
+      prefix: "test"
+    });
 
     await agent.get("/?example=test");
     const response = await agent.get("/?example=test");
@@ -25,7 +28,8 @@ describe("Middleware", () => {
 
     const agent = createAgent({
       property: "id",
-      errorHandling: { statusCode }
+      errorHandling: { statusCode },
+      prefix: "test"
     });
 
     await agent.get("/?id=test");
@@ -39,7 +43,8 @@ describe("Middleware", () => {
 
     const agent = createAgent({
       property: "id",
-      errorHandling: { json }
+      errorHandling: { json },
+      prefix: "test"
     });
 
     await agent.get("/?id=test");
