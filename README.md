@@ -16,7 +16,8 @@ const app = express();
 
 app.use(duplicate({
     expiration: "2h",
-    property: "id"
+    property: "id",
+    prefix: "root"
 }));
 
 app.get("/", (req, res) => res.end("Hey!"));
