@@ -16,6 +16,7 @@
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "eslint src/",
+    "docs": "typedoc src/",
     "prepublishOnly": "tsc"
   },
   "files": [
@@ -48,11 +49,12 @@
     "prettier": "^2.0.5",
     "supertest": "^4.0.2",
     "ts-jest": "^26.1.1",
+    "typedoc": "^0.20.16",
     "typescript": "^3.9.5"
   },
   "dependencies": {
-    "keyv": "^4.0.1",
-    "@types/express": "^4.17.7"
+    "@types/express": "^4.17.7",
+    "keyv": "^4.0.1"
   },
   "optionalDependencies": {
     "@keyv/mongo": "^1.1.0",
