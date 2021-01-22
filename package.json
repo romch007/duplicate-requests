@@ -18,7 +18,9 @@
     "lint": "eslint src/",
     "prepublishOnly": "tsc"
   },
-  "files": ["build/"],
+  "files": [
+    "build/"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://gitlab.com/romch007/duplicate-requests.git"
@@ -56,5 +58,7 @@
     "@keyv/mongo": "^1.1.0",
     "@keyv/redis": "^2.1.2"
   },
-  "engines": { "node": ">=6.0.0" }
+  "engines": {
+    "node": ">=6.0.0"
+  }
 }
