@@ -54,7 +54,7 @@ export type PropertyPicker =
   (req: Request) => string;
 
 /**
- * Middleware options passing at creation
+ * Middleware options passed at creation
  * @param expiration - TTL of requests
  * @param errorHandling - Error handling configuration
  * @param property - Way to get the id property
