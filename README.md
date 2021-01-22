@@ -50,8 +50,8 @@ app.listen(8080, () => console.log("Listening!"));
 If you want to use an external storage (currently supported are Redis and MongoDB), you need to install one of the following package :
 
 ```bash
-npm install --save @keyv/mongo
-npm install --save @keyv/redis
+yarn add @keyv/mongo
+yarn add @keyv/redis
 ```
 
 ## Todo
